@@ -9,6 +9,12 @@ const openingDistance = 20;
 let scene, camera, renderer, controls;
 let insideModel, outsideModel;
 let isCaseOpen = false;
+let raycaster, mouse;
+
+let mouseDownPosition = new THREE.Vector2();
+let mouseUpPosition = new THREE.Vector2();
+// Threshold in pixels to differentiate between click and drag
+const moveThreshold = 5;
 
 init();
 animate();
@@ -34,6 +40,10 @@ function init() {
     directionalLight.position.set(5, 5, 5).normalize();
     scene.add(directionalLight);
 
+    // Initialize raycaster and mouse
+    raycaster = new THREE.Raycaster();
+    mouse = new THREE.Vector2();
+
     // Load models
     const loader = new GLTFLoader();
     loader.load(insideModelPath, function (gltf) {
@@ -46,8 +56,10 @@ function init() {
         scene.add(outsideModel);
     });
 
-    // Add event listener for case opening
+    // Add event listeners for case opening
     document.addEventListener('keydown', onDocumentKeyDown, false);
+    document.addEventListener('mousedown', onDocumentMouseDown, false);
+    document.addEventListener('mouseup', onDocumentMouseUp, false);
 
     // Add OrbitControls
     controls = new OrbitControls(camera, renderer.domElement);
@@ -62,16 +74,54 @@ function init() {
 
 function onDocumentKeyDown(event) {
     if (event.key === 'o') { // Press 'o' to toggle open/close
-        if (event.key === 'o') { // Press 'o' to toggle open/close
-            isCaseOpen = !isCaseOpen;
-            if (insideModel && outsideModel) {
-                if (isCaseOpen) {
-                    insideModel.visible = true;
-                    gsap.to(outsideModel.position, { x: openingDistance, duration: 1, ease: "power2.inOut" });
-                } else {
-                    gsap.to(outsideModel.position, { x: 0, duration: 1, ease: "power2.inOut" });
-                }
-            }
+        toggleCase();
+    }
+}
+
+function onDocumentMouseDown(event) {
+    mouseDownPosition.set(event.clientX, event.clientY);
+}
+
+function onDocumentMouseUp(event) {
+    mouseUpPosition.set(event.clientX, event.clientY);
+
+    // Calculate the distance moved
+    const distance = mouseDownPosition.distanceTo(mouseUpPosition);
+
+    // Only consider it a click if the mouse hasn't moved significantly
+    if (distance < moveThreshold) {
+        // Calculate mouse position in normalized device coordinates (-1 to +1) for both components
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        // Update the picking ray with the camera and mouse position
+        raycaster.setFromCamera(mouse, camera);
+
+        // Calculate objects intersecting the picking ray
+        const intersects = raycaster.intersectObject(outsideModel, true);
+
+        if (intersects.length > 0) {
+            toggleCase();
+        }
+    }
+}
+
+function toggleCase() {
+    isCaseOpen = !isCaseOpen;
+    if (insideModel && outsideModel) {
+        if (isCaseOpen) {
+            insideModel.visible = true;
+            gsap.to(outsideModel.position, {
+                x: openingDistance,
+                duration: 1,
+                ease: "power4.inOut"
+            });
+        } else {
+            gsap.to(outsideModel.position, {
+                x: 0,
+                duration: 1,
+                ease: "power4.inOut"
+            });
         }
     }
 }

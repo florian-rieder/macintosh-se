@@ -33,11 +33,11 @@ function init() {
     document.body.appendChild(renderer.domElement);
 
     // Add light
-    const ambientLight = new THREE.AmbientLight(0x404040, 2);
+    const ambientLight = new THREE.AmbientLight(0x404040, 5);
     scene.add(ambientLight);
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(5, 5, 5).normalize();
+    directionalLight.position.set(-3, 5, 0).normalize();
     scene.add(directionalLight);
 
     // Initialize raycaster and mouse
@@ -45,16 +45,26 @@ function init() {
     mouse = new THREE.Vector2();
 
     // Load models
-    const loader = new GLTFLoader();
-    loader.load(insideModelPath, function (gltf) {
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.load(insideModelPath, function (gltf) {
         insideModel = gltf.scene;
         scene.add(insideModel);
     });
 
-    loader.load(outsideModelPath, function (gltf) {
+    gltfLoader.load(outsideModelPath, function (gltf) {
         outsideModel = gltf.scene;
         scene.add(outsideModel);
     });
+
+    // Load skybox
+    const textureLoader = new THREE.TextureLoader();
+    const texture = textureLoader.load(
+      '/images/Skybox.png',
+      () => {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        texture.colorSpace = THREE.SRGBColorSpace;
+        scene.background = texture;
+      });
 
     // Add event listeners for case opening
     document.addEventListener('keydown', onDocumentKeyDown, false);

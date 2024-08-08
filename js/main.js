@@ -25,7 +25,7 @@ function init() {
 
     // Create camera
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(50, 1, 2);
+    camera.position.set(-50, 4, 1.5);
 
     // Create renderer
     renderer = new THREE.WebGLRenderer();
@@ -37,7 +37,7 @@ function init() {
     scene.add(ambientLight);
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(-3, 5, 0).normalize();
+    directionalLight.position.set(-4, 5, 0).normalize();
     scene.add(directionalLight);
 
     // Initialize raycaster and mouse
@@ -54,6 +54,9 @@ function init() {
     gltfLoader.load(outsideModelPath, function (gltf) {
         outsideModel = gltf.scene;
         scene.add(outsideModel);
+        // Track mouse position to show cursor, because it needs the
+        // outsideModel to be loaded, otherwise it's undefined
+        document.onmousemove = onMouseMove;
     });
 
     // Load skybox
@@ -145,8 +148,22 @@ function onWindowResize() {
 function animate() {
     requestAnimationFrame(animate);
 
-    // Required if controls.enableDamping or controls.autoRotate are set to true
     controls.update();
-
     renderer.render(scene, camera);
+}
+
+function onMouseMove(event) {
+    // Calculate objects intersecting the picking ray
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObject(outsideModel, true);
+
+    // Show pointer cursor if the mouse is hovering over the Mac case
+    if (intersects.length > 0) {
+        document.body.style.cursor = 'pointer';
+    } else {
+        document.body.style.cursor = 'inherit';
+    }
 }

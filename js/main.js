@@ -25,7 +25,7 @@ function init() {
 
     // Create camera
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(-50, 4, 1.5);
+    camera.position.set(-50, 10, 1.5);
 
     // Create renderer
     renderer = new THREE.WebGLRenderer();
@@ -54,9 +54,6 @@ function init() {
     gltfLoader.load(outsideModelPath, function (gltf) {
         outsideModel = gltf.scene;
         scene.add(outsideModel);
-        // Track mouse position to show cursor, because it needs the
-        // outsideModel to be loaded, otherwise it's undefined
-        document.onmousemove = onMouseMove;
     });
 
     // Load skybox
@@ -73,13 +70,19 @@ function init() {
     document.addEventListener('keydown', onDocumentKeyDown, false);
     document.addEventListener('mousedown', onDocumentMouseDown, false);
     document.addEventListener('mouseup', onDocumentMouseUp, false);
+    document.addEventListener('mousemove', onMouseMove, false)
 
     // Add OrbitControls
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
     controls.dampingFactor = 0.25;
     controls.screenSpacePanning = false;
-    controls.maxPolarAngle = Math.PI / 2;
+    controls.maxPolarAngle = Math.PI;
+    controls.minPolarAngle = 0;
+    controls.maxDistance = 100;
+    controls.target.set(0, 10, 1.5); // Set center of the orbit
+    controls.autoRotate = true;
+    controls.enablePan = true;
 
     // Resize handler
     window.addEventListener('resize', onWindowResize, false);
@@ -103,26 +106,18 @@ function onDocumentMouseUp(event) {
 
     // Only consider it a click if the mouse hasn't moved significantly
     if (distance < moveThreshold) {
-        // Calculate mouse position in normalized device coordinates (-1 to +1) for both components
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-        // Update the picking ray with the camera and mouse position
-        raycaster.setFromCamera(mouse, camera);
-
-        // Calculate objects intersecting the picking ray
-        const intersects = raycaster.intersectObject(outsideModel, true);
-
-        if (intersects.length > 0) {
+        if (mouseIntersectsCase(event)) {
             toggleCase();
         }
     }
 }
 
 function toggleCase() {
-    isCaseOpen = !isCaseOpen;
     if (insideModel && outsideModel) {
+        isCaseOpen = !isCaseOpen;
+
         if (isCaseOpen) {
+            controls.autoRotate = false;
             insideModel.visible = true;
             gsap.to(outsideModel.position, {
                 x: openingDistance,
@@ -130,6 +125,7 @@ function toggleCase() {
                 ease: "power4.inOut"
             });
         } else {
+            controls.autoRotate = true;
             gsap.to(outsideModel.position, {
                 x: 0,
                 duration: 1,
@@ -148,22 +144,32 @@ function onWindowResize() {
 function animate() {
     requestAnimationFrame(animate);
 
+    // required if controls.enableDamping or controls.autoRotate are set to true
     controls.update();
     renderer.render(scene, camera);
 }
 
 function onMouseMove(event) {
-    // Calculate objects intersecting the picking ray
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-    raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObject(outsideModel, true);
+    if (!outsideModel) return;
 
     // Show pointer cursor if the mouse is hovering over the Mac case
-    if (intersects.length > 0) {
+    if (mouseIntersectsCase(event)) {
         document.body.style.cursor = 'pointer';
     } else {
         document.body.style.cursor = 'inherit';
     }
+}
+
+function mouseIntersectsCase(event) {
+    // Calculate mouse position in normalized device coordinates (-1 to +1) for both components
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    // Update the picking ray with the camera and mouse position
+    raycaster.setFromCamera(mouse, camera);
+
+    // Calculate objects intersecting the picking ray
+    const intersects = raycaster.intersectObject(outsideModel, true);
+
+    return intersects.length > 0
 }

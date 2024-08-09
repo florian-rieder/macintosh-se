@@ -30,13 +30,144 @@
 
 <body>
     <div id="info">
-        The Apple Macintosh SE features an 8 MHz 68000 processor, 1 MB or 2 MB of RAM, and either dual 800k disk drives or one 800k disk drive and a 20 MB or 40 MB hard drive in a compact all-in-one case with a 9" monochrome display.
+        <div id="info-tabs">
+            <div class="tab active" onclick="openTab('info-content')">Information</div>
+            <div class="tab" onclick="openTab('specs-content')">Specs</div>
+            <div class="tab" onclick="openTab('links-content')">Links</div>
+        </div>
 
-        Most notably, the Macintosh SE was the first Macintosh to offer an internal hard drive as well as a customized PDS expansion slot for other options.
+        <div id="info-content" class="tab-content">
+            The Apple Macintosh SE FDHD features an 8 MHz 68000 processor, 1 MB of RAM, and either a 20 MB or 40 MB hard
+            drive in a compact all-in-one case with a 9" monochrome display.
 
+            Most notably, the Macintosh SE FDHD was the first compact monochrome Macintosh to offer a high-density 1.44
+            MB "SuperDrive" disk drive as well as a customized PDS expansion slot.
+        </div>
+
+        <div id="specs-content" class="tab-content" style="display: none;">
+            <div>
+                <!-- Accordion Section 1: Timeline -->
+                <button class="accordion active">🗓️ Timeline</button>
+                <div class="panel" style="display: block">
+                    <p><b>Introduction Date:</b> August 1, 1989</p>
+                    <p><b>Discontinued Date:</b> October 15, 1990</p>
+                </div>
+
+                <!-- Accordion Section 2: Processor -->
+                <button class="accordion">🖥️ Processor</button>
+                <div class="panel">
+                    <p><b>Processor Speed:</b> 8 MHz</p>
+                    <p><b>Processor Type:</b> 68000</p>
+                    <p><b>Processor Upgrade:</b> Third-Party</p>
+                    <p><b>FPU:</b> N/A</p>
+                </div>
+
+                <!-- Accordion Section 3: Memory -->
+                <button class="accordion">💾 Memory</button>
+                <div class="panel">
+                    <p><b>Standard RAM:</b> 1 MB</p>
+                    <p><b>Maximum RAM:</b> 4 MB*</p>
+                    <p><b>RAM Type:</b> 30-pin SIMM</p>
+                </div>
+
+                <!-- Accordion Section 4: Storage -->
+                <button class="accordion">💾 Storage</button>
+                <div class="panel">
+                    <p><b>Standard Hard Drive:</b> 20 MB, 40 MB*</p>
+                    <p><b>Int. HD Interface:</b> SCSI*</p>
+                </div>
+
+                <!-- Accordion Section 5: Display -->
+                <button class="accordion">🖥️ Display</button>
+                <div class="panel">
+                    <p><b>Built-in Display:</b> 9" Monochrome</p>
+                    <p><b>Native Resolution:</b> 512x342</p>
+                </div>
+
+                <!-- Accordion Section 6: Expansion -->
+                <button class="accordion">🔌 Expansion</button>
+                <div class="panel">
+                    <p><b>Expansion Slots:</b> SE PDS</p>
+                    <p><b>Expansion Bays:</b> None*</p>
+                </div>
+
+                <!-- Accordion Section 7: Connectivity -->
+                <button class="accordion">🌐 Connectivity</button>
+                <div class="panel">
+                    <p><b>Standard Modem:</b> None</p>
+                    <p><b>Standard Ethernet:</b> None</p>
+                </div>
+
+                <!-- Accordion Section 8: Miscellaneous -->
+                <button class="accordion">🔍 Miscellaneous</button>
+                <div class="panel">
+                    <p><b>Case Type:</b> All-in-One</p>
+                    <p><b>Form Factor:</b> Macintosh SE</p>
+                    <p><b>Apple Order No:</b> N/A</p>
+                    <p><b>Apple Subfamily:</b> Macintosh SE FDHD</p>
+                    <p><b>Apple Model No:</b> M5011</p>
+                    <p><b>Gestalt ID:</b> 5</p>
+                    <p><b>Battery Type:</b> 3.6V Lithium</p>
+                    <p><b>Battery Life:</b> N/A</p>
+                    <p><b>Original Mac OS:</b> 3.3</p>
+                    <p><b>Supported Mac OS:</b> 3.3-7.5.1, 7.5.3-7.5.5</p>
+                    <p><b>Dimensions:</b> 13.6 x 9.69 x 10.9 in (34.54 x 24.61 x 27.69 cm)</p>
+                    <p><b>Avg. Weight:</b> 17.0 lbs (7.7 kg)</p>
+                    <p><b>Original Price (US):</b> US$3700</p>
+                    <p><b>Est. Current Retail:</b> N/A*</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="links-content" class="tab-content" style="display: none;">
+            <ul>
+                <li>Emulator: <a href="https://infinitemac.org/1987/System%203.3?machine=Mac+SE" target="_blank">InfiniteMac.org</a></li>
+                <li>Information and specsheet: <a href="https://everymac.com/systems/apple/mac_classic/specs/mac_se_fdhd.html" target="_blank">EveryMac.com</a></li>
+            </ul>
+        </div>
+    </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
     <script type="module" src="js/main.js"></script>
+    <script>
+        function openTab(tabId) {
+            // Hide all tab content
+            var contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.style.display = 'none';
+            });
+
+            // Remove active class from all tabs
+            var tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show the selected tab content and make the tab active
+            document.getElementById(tabId).style.display = 'block';
+            event.target.classList.add('active');
+        }
+
+        // Initially display the first tab
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector('.tab-content').style.display = 'block';
+        });
+
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

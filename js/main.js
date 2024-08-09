@@ -15,6 +15,7 @@ let mouseDownPosition = new THREE.Vector2();
 let mouseUpPosition = new THREE.Vector2();
 // Threshold in pixels to differentiate between click and drag
 const moveThreshold = 5;
+let isMouseOverInfo = false;
 
 init();
 animate();
@@ -70,7 +71,9 @@ function init() {
     document.addEventListener('keydown', onDocumentKeyDown, false);
     document.addEventListener('mousedown', onDocumentMouseDown, false);
     document.addEventListener('mouseup', onDocumentMouseUp, false);
-    document.addEventListener('mousemove', onMouseMove, false)
+    document.addEventListener('mousemove', onMouseMove, false);
+    document.querySelector('#info').addEventListener('mouseover', () => isMouseOverInfo = true, false);
+    document.querySelector('#info').addEventListener('mouseout', () => isMouseOverInfo = false, false);
 
     // Add OrbitControls
     controls = new OrbitControls(camera, renderer.domElement);
@@ -106,7 +109,7 @@ function onDocumentMouseUp(event) {
 
     // Only consider it a click if the mouse hasn't moved significantly
     if (distance < moveThreshold) {
-        if (mouseIntersectsCase(event)) {
+        if (!isMouseOverInfo && mouseIntersectsCase(event)) {
             toggleCase();
         }
     }
@@ -153,7 +156,7 @@ function onMouseMove(event) {
     if (!outsideModel) return;
 
     // Show pointer cursor if the mouse is hovering over the Mac case
-    if (mouseIntersectsCase(event)) {
+    if (!isMouseOverInfo && mouseIntersectsCase(event)) {
         document.body.style.cursor = 'pointer';
     } else {
         document.body.style.cursor = 'inherit';
@@ -173,3 +176,4 @@ function mouseIntersectsCase(event) {
 
     return intersects.length > 0
 }
+

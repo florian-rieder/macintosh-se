@@ -50,6 +50,7 @@ function init() {
     gltfLoader.load(insideModelPath, function (gltf) {
         insideModel = gltf.scene;
         scene.add(insideModel);
+        document.getElementById('loader-container').style.display = 'none';
     });
 
     gltfLoader.load(outsideModelPath, function (gltf) {

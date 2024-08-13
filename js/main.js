@@ -35,6 +35,17 @@ function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
+    // Add OrbitControls
+    controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+    controls.dampingFactor = 0.25;
+    controls.screenSpacePanning = false;
+    controls.maxPolarAngle = Math.PI;
+    controls.minPolarAngle = 0;
+    controls.maxDistance = 100;
+    controls.target.set(0, 10, 1.5); // Set center of the orbit
+    controls.enablePan = true;
+
     // Add light
     const ambientLight = new THREE.AmbientLight(0x404040, 5);
     scene.add(ambientLight);
@@ -52,7 +63,10 @@ function init() {
     gltfLoader.load(insideModelPath, function (gltf) {
         insideModel = gltf.scene;
         scene.add(insideModel);
+        // Hide the loader
         document.getElementById('loader-container').style.display = 'none';
+        // Only start rotating once the model has loaded
+        controls.autoRotate = true;
     });
 
     gltfLoader.load(outsideModelPath, function (gltf) {
@@ -63,12 +77,12 @@ function init() {
     // Load skybox
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load(
-      '/images/Skybox.png',
-      () => {
-        texture.mapping = THREE.EquirectangularReflectionMapping;
-        texture.colorSpace = THREE.SRGBColorSpace;
-        scene.background = texture;
-      });
+        '/images/Skybox.png',
+        () => {
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            texture.colorSpace = THREE.SRGBColorSpace;
+            scene.background = texture;
+        });
 
     // Add event listeners for case opening
     document.addEventListener('keydown', onDocumentKeyDown, false);
@@ -79,18 +93,6 @@ function init() {
     document.querySelector('#info').addEventListener('mouseout', () => isMouseOverInfo = false, false);
     document.querySelector('#toggle-info').addEventListener('mouseover', () => isMouseOverToggle = true, false);
     document.querySelector('#toggle-info').addEventListener('mouseout', () => isMouseOverToggle = false, false);
-
-    // Add OrbitControls
-    controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-    controls.dampingFactor = 0.25;
-    controls.screenSpacePanning = false;
-    controls.maxPolarAngle = Math.PI;
-    controls.minPolarAngle = 0;
-    controls.maxDistance = 100;
-    controls.target.set(0, 10, 1.5); // Set center of the orbit
-    controls.autoRotate = true;
-    controls.enablePan = true;
 
     // Resize handler
     window.addEventListener('resize', onWindowResize, false);

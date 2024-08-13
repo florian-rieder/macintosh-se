@@ -10,7 +10,7 @@ This project was developed for the course "Virtual and Augmented Reality", given
 ![Preview of the app](https://github.com/user-attachments/assets/d812118e-1c74-4ebc-9ab4-6c4ed6f79c55)
 
 ## Features
-The application includes a full 360° view around the Macintosh SE FDHD, allowing users to interactively open and close the case by simply clicking on it. Additional information about the machine is available through an infobox with multiple tabs, including general information, technical specifications, and links to useful resources such as an emulator, the specs sheet source, and Wikipedia.
+The application includes a full 360° view, as well as panning, around the Macintosh SE FDHD, allowing users to interactively open and close the case by simply clicking on it. Additional information about the machine is available through an infobox with multiple tabs, including general information, technical specifications, and links to useful resources such as an emulator, the specs sheet source, and Wikipedia.
 
 ## Models
 ![Disassembly of the Macintosh SE FDHD](https://github.com/user-attachments/assets/a2a96373-e7a5-4bf4-87b0-5fb1fa182213)

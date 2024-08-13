@@ -7,15 +7,22 @@ This project was developed for the course "Virtual and Augmented Reality", given
 
 [Explore the Macintosh SE](https://florian-rieder.github.io/macintosh-se/)
 
+![Preview of the app](https://github.com/user-attachments/assets/d812118e-1c74-4ebc-9ab4-6c4ed6f79c55)
+
 ## Features
 The application includes a full 360° view around the Macintosh SE FDHD, allowing users to interactively open and close the case by simply clicking on it. Additional information about the machine is available through an infobox with multiple tabs, including general information, technical specifications, and links to useful resources such as an emulator, the specs sheet source, and Wikipedia.
 
 ## Models
+![Disassembly of the Macintosh SE FDHD](https://github.com/user-attachments/assets/a2a96373-e7a5-4bf4-87b0-5fb1fa182213)
+
 The 3D models of the Macintosh SE FDHD were created using Reality Capture photogrammetry software. The computer was carefully disassembled, and separate models were made for both the exterior case and the interior components.
 
-To reconstruct the interior, 415 images were used. This process was relatively straightforward due to the abundance of distinct features on all sides, such as text, components, cables, and the monitor. These elements provided numerous reference points for accurate alignment.
+![Photography process](https://github.com/user-attachments/assets/33e9099b-4ad7-4a8b-abe2-329131470343)
 
-The exterior case, however, presented more challenges. It required 425 images for reconstruction, but the smooth plastic surface made it difficult to achieve proper alignment, resulting in multiple unaligned fragments. To address this, a second photoshoot was conducted with markers placed on each side of the case. These markers provided the necessary reference points, although manual intervention was still required to identify and mark additional control points, after which a satisfactory model was produced.
+
+To reconstruct the interior, 415 images were taken at various heights all around the computer. This process was relatively straightforward due to the abundance of distinct features on all sides, such as text, components, cables, and the monitor. These elements provided numerous reference points for accurate alignment.
+
+The exterior case, however, presented more challenges. The smooth plastic surface made it difficult to achieve proper alignment, resulting in multiple unaligned fragments. To address this, a second photoshoot was conducted with markers placed on each side of the case. These markers provided the necessary reference points, although manual intervention was still required to identify and mark additional control points, after which a satisfactory model was produced. The reconstruction used 425 images taken at various heights all around the case, made with the aid of a turntable.
 
 After the models were generated, they were simplified, and the textures were recalculated and reprojected onto the models, reducing the file sizes to approximately 6MB each, making them more suitable for web use.
 

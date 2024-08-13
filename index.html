@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Macintosh SE Visualization</title>
+    <base target="_blank">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
         integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
@@ -45,63 +46,85 @@
         </div>
 
         <div id="info-content" class="tab-content">
-            The Apple Macintosh SE FDHD features an 8 MHz 68000 processor, 1 MB of RAM, and either a 20 MB or 40 MB hard
-            drive in a compact all-in-one case with a 9" monochrome display.
-
-            Most notably, the Macintosh SE FDHD was the first compact monochrome Macintosh to offer a high-density 1.44
-            MB "SuperDrive" disk drive as well as a customized PDS expansion slot.
+            <p>The Apple Macintosh SE FDHD features an 8 MHz 68000 processor, 1 MB of RAM, and either a 20 MB or 40 MB
+                hard
+                drive in a compact all-in-one case with a 9" monochrome display.</p>
+            <p>Most notably, the Macintosh SE FDHD was the first compact monochrome Macintosh to offer a high-density
+                1.44
+                MB "SuperDrive" disk drive as well as a customized PDS expansion slot.</p>
+            <p><b>Click on the case to open the computer and see what's inside.</b></p>
         </div>
 
         <div id="specs-content" class="tab-content" style="display: none;">
             <div>
-                <!-- Accordion Section 1: Timeline -->
+                <!-- Timeline -->
                 <button class="accordion active">🗓️ Timeline</button>
                 <div class="panel" style="display: block">
                     <p><b>Introduction Date:</b> August 1, 1989</p>
                     <p><b>Discontinued Date:</b> October 15, 1990</p>
                 </div>
 
-                <!-- Accordion Section 2: Processor -->
-                <button class="accordion">🖥️ Processor</button>
+                <!-- Processor -->
+                <button class="accordion">🧠 Processor</button>
                 <div class="panel">
                     <p><b>Processor Speed:</b> 8 MHz</p>
-                    <p><b>Processor Type:</b> Motorola 68000</p>
-                    <p><b>Processor Upgrade:</b> Third-Party</p>
-                    <p><b>FPU:</b> N/A</p>
+                    <p><b>Processor Type:</b> <a href="https://en.wikipedia.org/wiki/Motorola_68000">Motorola 68000</a>
+                    </p>
+                    <p><b>Processor Upgrade:</b> Third-Party upgrades available</p>
+                    <p><b>System Bus Speed:</b> 8Mhz</p>
+                    <p><b>L1 Cache: None</b></p>
                 </div>
 
-                <!-- Accordion Section 3: Memory -->
+                <!-- Memory -->
                 <button class="accordion">💾 Memory</button>
                 <div class="panel">
                     <p><b>Standard RAM:</b> 1 MB</p>
-                    <p><b>Maximum RAM:</b> 4 MB*</p>
+                    <p><b>Maximum RAM:</b> 4 MB</p>
+                    <p><b>Min. RAM Speed:</b> 150ns</p>
                     <p><b>RAM Type:</b> 30-pin SIMM</p>
+                    <p><b>ROM Type:</b> Macintosh ROM</p>
+                    <p><b>ROM Size:</b> 256kb</p>
                 </div>
 
-                <!-- Accordion Section 4: Storage -->
+                <!-- Storage -->
                 <button class="accordion">💽 Storage</button>
                 <div class="panel">
                     <p><b>Standard Hard Drive:</b> 20 MB, 40 MB*</p>
-                    <p><b>Int. HD Interface:</b> SCSI*</p>
+                    <p><b>Internal HD Interface:</b> SCSI*</p>
+                    <p><b>Standard Disk: 1.44Mb (Auto)</b></p>
                 </div>
 
-                <!-- Accordion Section 5: Display -->
+                <!-- Display -->
                 <button class="accordion">🖥️ Display</button>
                 <div class="panel">
                     <p><b>Built-in Display:</b> 9" Monochrome</p>
                     <p><b>Native Resolution:</b> 512x342</p>
+                    <p><b>Video card:</b> Integrated</p>
+                    <p><b>VRAM Type: Built-in</b></p>
                 </div>
 
-                <!-- Accordion Section 6: Expansion -->
-                <button class="accordion">🔌 Expansion</button>
+                <!-- Expansion -->
+                <button class="accordion">🔧 Expansion</button>
                 <div class="panel">
                     <p><b>Expansion Slots:</b> SE PDS</p>
-                    <p><b>Expansion Bays:</b> None*</p>
+                    <p><b>Expansion Bays:</b> Two front-facing 3.5" drive bays occupied by default with a 1.44 MB disk
+                        drive and a hard drive, respectively.</p>
                 </div>
 
-                <!-- Accordion Section 7: Connectivity -->
+                <!-- Expansion -->
+                <button class="accordion">🔌 Ports</button>
+                <div class="panel">
+                    <p><b>Floppy disk:</b> 1 (DB-19)</p>
+                    <p><b>Serial port:</b> 2</p>
+                    <p><b>Sound out:</b> 1 (Mono)</p></b>
+                    <p><b>Security (lock):</b> 1</p>
+                    <p><b>Power:</b> 1 (90V-270V AC, 47-63 Hz Frequency, 100 Max Watts)</p>
+                </div>
+
+                <!-- Connectivity -->
                 <button class="accordion">🌐 Connectivity</button>
                 <div class="panel">
+                    <p><b>Standard optical:</b> None</p>
                     <p><b>Standard Modem:</b> None</p>
                     <p><b>Standard Ethernet:</b> None</p>
                 </div>
@@ -121,18 +144,20 @@
                     <p><b>Supported Mac OS:</b> 3.3-7.5.1, 7.5.3-7.5.5</p>
                     <p><b>Dimensions:</b> 13.6 x 9.69 x 10.9 in (34.54 x 24.61 x 27.69 cm)</p>
                     <p><b>Avg. Weight:</b> 17.0 lbs (7.7 kg)</p>
-                    <p><b>Original Price (US):</b> US$3700</p>
+                    <p><b>Original Price (USD):</b> $3700</p>
                 </div>
             </div>
         </div>
 
         <div id="links-content" class="tab-content" style="display: none;">
             <ul>
-                <li>Emulator: <a href="https://infinitemac.org/1987/System%203.3?machine=Mac+SE"
-                        target="_blank">InfiniteMac.org</a></li>
+                <li>Emulator: <a href="https://infinitemac.org/1987/System%203.3?machine=Mac+SE">InfiniteMac.org</a>
+                </li>
                 <li>Information and specsheet: <a
-                        href="https://everymac.com/systems/apple/mac_classic/specs/mac_se_fdhd.html"
-                        target="_blank">EveryMac.com</a></li>
+                        href="https://everymac.com/systems/apple/mac_classic/specs/mac_se_fdhd.html">EveryMac.com</a>
+                </li>
+                <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Macintosh_SE#Macintosh_SE_FDHD">Macintosh SE</a>
+                </li>
             </ul>
         </div>
     </div>

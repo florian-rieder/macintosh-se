@@ -79,12 +79,14 @@ body {
 .tab:hover {
     color: var(--whiter);
     background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .tab.active {
     color: var(--whiter);
     background-color: rgba(255, 255, 255, 0.2);
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid var(--whiter);
+    backdrop-filter: blur(10px);
 }
 
 .tab-content {
@@ -123,7 +125,7 @@ body {
 
 .accordion {
     background-color: rgba(118, 118, 118, 0.129);
-    color: rgb(141, 141, 141);
+    color: var(--white);
     cursor: pointer;
     padding: 10px;
     width: 100%;
@@ -144,7 +146,7 @@ body {
 .accordion:after {
     content: '\002B';
     /* plus sign */
-    color: rgb(141, 141, 141);
+    color: var(--white);
     font-weight: bold;
     float: right;
     margin-left: 5px;
@@ -159,11 +161,4 @@ body {
     padding: 0 10px;
     display: none;
     overflow: hidden;
-}
-
-.icon {
-    margin-right: 10px;
-    width: 16px;
-    height: 16px;
-    vertical-align: middle;
 }

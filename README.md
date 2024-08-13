@@ -33,8 +33,8 @@ Initially, I planned to remove the markers from the texture using Blender. Howev
 An additional challenge arose after these post-processing steps when the file sizes for each model ballooned to around 20MB, which I consider too large. Despite my efforts, I have not yet found a way to reduce the file size further.
 
 ## Libraries
-`three.js`: Handles the 3D rendering and interaction.
-`gsap.js`: Manages animations, including the opening and closing of the case.
+- `three.js`: Handles the 3D rendering and interaction.
+- `gsap.js`: Manages animating the opening and closing of the case.
 
 ## Installation
 Setting up the development environment for this static website is straightforward. It can be done using Visual Studio Code or its open-source alternative, [VSCodium](https://vscodium.com/) with the [Live Server (Five Server)](https://open-vsx.org/extension/glenn2223/live-sass) plugin.

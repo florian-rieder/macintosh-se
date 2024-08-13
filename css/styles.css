@@ -169,6 +169,8 @@ body {
     left: calc(50% - 40px);
 }
 
+/* https://cssloaders.github.io/ */
+
 .loader {
     width: 80px;
     height: 80px;

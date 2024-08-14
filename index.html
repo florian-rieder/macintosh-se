@@ -37,7 +37,7 @@
     <div id="toggle-info">
         <i class="bi bi-info-circle" onclick="toggleInfo()"></i>
     </div>
-    <div id="info" style="opacity: 0;">
+    <div id="info" style="opacity: 0; display: none;">
         <h1>Apple Macintosh SE FDHD</h1>
         <div id="info-tabs">
             <div class="tab active" onclick="openTab('info-content')">Information</div>
@@ -191,10 +191,12 @@
 
             if (info.style.opacity == "1") {
                 info.style.opacity = "0";
+                info.style.display = "none"
                 icon.classList.add('bi-circle-info');
                 icon.classList.remove('bi-x-lg');
             } else {
                 info.style.opacity = "1";
+                info.style.display = "inherit";
                 icon.classList.remove('bi-circle-info');
                 icon.classList.add('bi-x-lg');
             }

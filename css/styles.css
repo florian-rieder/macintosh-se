@@ -25,6 +25,20 @@ body {
     color: var(--whiter);
 }
 
+#unavailable-components {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    max-width: min(40%, 500px);
+    padding: 1em;
+    background-color: rgba(40, 40, 40, 0.25);
+    color: var(--white);
+    box-sizing: border-box;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border-radius: 5px;
+}
+
 #info {
     position: fixed;
     bottom: 0px;

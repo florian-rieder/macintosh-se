@@ -206,6 +206,9 @@ function onDocumentKeyDown(event) {
     if (event.key === 'm') {
         goToComponent('monitor');
     }
+    if (event.key === 's') {
+        showUnavailableComponent();
+    }
 }
 
 function onDocumentMouseDown(event) {
@@ -331,4 +334,9 @@ function goToComponent(componentName) {
             controls.update();
         }
     });
+}
+
+function showUnavailableComponent() {
+    document.getElementById('unavailable-components').style.display = 'inherit';
+    setTimeout(() => document.getElementById('unavailable-components').style.display = 'none', 8000);
 }
